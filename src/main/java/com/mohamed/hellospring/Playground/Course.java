@@ -2,6 +2,7 @@ package com.mohamed.hellospring.Playground;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Course {
     private final String name;
@@ -41,5 +42,32 @@ public class Course {
 
     protected void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                ", credits=" + credits +
+                ", teacher=" + teacher +
+                ", students=" + students +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return getCredits() == course.getCredits() &&
+                getName().equals(course.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 31 * credits;
+        hash = hash + name.hashCode();
+        return hashCode();
     }
 }

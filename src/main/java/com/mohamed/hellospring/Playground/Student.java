@@ -1,7 +1,9 @@
 package com.mohamed.hellospring.Playground;
 
+import java.util.Objects;
+
 public class Student {
-    private int nextStudentId = 1;
+    private static int nextStudentId = 1;
     private   int id;
     private String name;
     private double gpa;
@@ -71,8 +73,32 @@ public class Student {
             return "Senior"; }
     }
 
-//    public void toString(){
-//
-//    }
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gpa=" + gpa +
+                ", courseCompleted=" + courseCompleted +
+                ", numberOfCredits=" + numberOfCredits +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 31 * id;
+        hash = hash + name.hashCode() ;
+        return hash;
+    }
+    @Override
+    public boolean equals(Object o){
+        if (o == this) return true;
+        if (o == null) return false;
+        if (o.getClass() != getClass()) return false;
+        Student theStudent = (Student) o;
+        return theStudent.getId() == getId();
+    }
+
+
 
 }
