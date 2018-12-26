@@ -1,17 +1,26 @@
 package com.mohamed.hellospring.restaurant;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Menu {
+    private static int nextId = 1;
+    private final int id;
     private final String name;
     private List<MenuItem> menuItemList;
     private List<Category> categoriesList;
+    private Date updated;
+
 
     public Menu(String name,List<MenuItem> menuItemList,List<Category> categoriesList){
         this.name=name;
         this.menuItemList=menuItemList;
         this.categoriesList=categoriesList;
+        this.updated = new Date();
+        this.id = nextId;
+        nextId++;
     }
     public Menu(String name){
         this(name,new ArrayList<MenuItem>(),new ArrayList<Category>());
@@ -37,4 +46,42 @@ public class Menu {
     }
 
 
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = new Date();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", menuItemList=" + menuItemList +
+                ", categoriesList=" + categoriesList +
+                ", updated=" + updated +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Menu menu = (Menu) o;
+        return getId() == menu.getId() &&
+                Objects.equals(getName(), menu.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 31 * id;
+        hash = hash * name.hashCode();
+        return hash;
+    }
 }

@@ -1,25 +1,28 @@
 package com.mohamed.hellospring.restaurant;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class MenuItem {
+    private static int nextId = 1;
+    private final int id;
     private final String name;
     private double price;
     private String description;
     private Category category;
     private Date created;
-    private Date updated;
 
-    public MenuItem(String name,double price,String description,Category category,Date created,Date updated){
+    public MenuItem(String name,double price,String description,Category category){
         this.name=name;
         this.price=price;
         this.description=description;
         this.category=category;
-        this.created=created;
-        this.updated=updated;
+        this.created=new Date();
+        this.id = nextId;
+        nextId++;
     }
-    public MenuItem(String name,double price,String description,Category category){
-        this(name,price,description,category,new Date(),new Date());
+    public MenuItem(String name,double price){
+        this(name,price,"",new Category());
     }
 
     public String getName() {
@@ -55,14 +58,34 @@ public class MenuItem {
     }
 
     protected void setCreated(Date created) {
-        this.created = created;
+        this.created = new Date();
     }
 
-    public Date getUpdated() {
-        return updated;
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", created=" + created +
+                '}';
     }
 
-    protected void setUpdated(Date updated) {
-        this.updated = updated;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return id == menuItem.id &&
+                Objects.equals(getName(), menuItem.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 31 * id;
+        hash = hash * name.hashCode();
+        return hash;
     }
 }
