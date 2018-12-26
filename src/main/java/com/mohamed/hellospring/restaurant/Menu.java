@@ -84,4 +84,27 @@ public class Menu {
         hash = hash * name.hashCode();
         return hash;
     }
+
+    public boolean removeAMenuItem(String name){
+        for (MenuItem item : menuItemList){
+            if (item.getName().equals(name)){
+                menuItemList.remove(item.getId());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addAMenuItem(MenuItem item){
+        menuItemList.add(item);
+    }
+
+    public boolean checkIfUpdated(){
+        Date nowDate = new Date();
+        long howLongItemIsNew = 1000 * 60 * 60 * 24 * 7;
+        if(nowDate.getTime() - updated.getTime() < howLongItemIsNew ){
+            return true;
+        }return false;
+    }
+
 }

@@ -21,7 +21,9 @@ public class Category {
     public Category(){
         this("");
     }
-
+    public int getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }

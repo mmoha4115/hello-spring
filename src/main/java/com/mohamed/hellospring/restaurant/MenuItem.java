@@ -28,7 +28,9 @@ public class MenuItem {
     public String getName() {
         return name;
     }
-
+    public int getId() {
+        return id;
+    }
     public double getPrice() {
         return price;
     }
@@ -87,5 +89,13 @@ public class MenuItem {
         int hash = 31 * id;
         hash = hash * name.hashCode();
         return hash;
+    }
+
+    public boolean checkIfNew(){
+        Date nowDate = new Date();
+        long howLongItemIsNew = 1000 * 60 * 60 * 24 * 7;
+        if(nowDate.getTime() - created.getTime() < howLongItemIsNew ){
+            return true;
+        }return false;
     }
 }
